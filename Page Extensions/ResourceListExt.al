@@ -21,7 +21,7 @@ pageextension 123456701 ResourceListExt extends "Resource List"
     trigger OnOpenPage();
     begin
         FilterGroup(3);
-        ShowType := (GetFilter(Type) = '');
+        ShowType := (GetFilter(Type) <> '');
         ShowMaxField := (GetFilter(Type) = format(Type::Machine));
         FilterGroup(0);
     end;
