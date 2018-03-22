@@ -35,20 +35,5 @@ table 123456700 "Seminar Setup"
         }
     }
 
-    trigger OnInsert();
-    begin
-    end;
-
-    trigger OnModify();
-    begin
-    end;
-
-    trigger OnDelete();
-    begin
-    end;
-
-    trigger OnRename();
-    begin
-    end;
 
 }
