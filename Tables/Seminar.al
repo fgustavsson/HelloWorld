@@ -59,7 +59,7 @@ table 123456701 Seminar
             Caption = 'Comment';
             Editable = false;
             FieldClass = FlowField;
-            CalcFormula = exist ("Seminar Comment Line" where ("Table Name" = const (123456701), "No." = field ("No.")));
+            CalcFormula = exist ("Seminar Comment Line" where ("Table Name" = const ("Seminar"), "No." = field ("No.")));
         }
         field(100; "Seminar Price"; Decimal)
         {
