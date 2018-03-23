@@ -14,6 +14,7 @@
   "capabilities": [],
   "dependencies": [],
   "screenshots": [],
+  "showMyCode": true,
   "platform": "11.0.0.0",
   "features": "TranslationFile",
   "application": "11.0.0.0",
