@@ -4,6 +4,7 @@ page 123456706 "Seminar Comment Sheet"
     SourceTable = "Seminar Comment Line";
     Caption = 'Seminar Comment Sheet';
     UsageCategory = Tasks;
+    AutoSplitKey = true;
 
     layout
     {
@@ -26,4 +27,8 @@ page 123456706 "Seminar Comment Sheet"
             }
         }
     }
+    trigger OnNewRecord(BelowxRec : Boolean);
+    begin
+        SetupNewLine;
+    end;
 }
