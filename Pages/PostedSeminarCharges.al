@@ -10,7 +10,7 @@ page 123456739 "Posted Seminar Charges"
     PageType = List;
     SourceTable = "Posted Seminar Charge";
     UsageCategory=Lists;
-
+    
     layout
     {
         area(content)

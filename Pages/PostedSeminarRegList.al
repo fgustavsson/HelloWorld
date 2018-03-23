@@ -69,9 +69,9 @@ page 123456736 "Posted Seminar Reg. List"
                 {
                     Caption = 'Co&mments';
                     Image = Comment;
-                    RunObject = Page "Seminar Comment List";
+                    RunObject = Page "Seminar Comment Sheet";
                     RunPageLink = "No."=Field("No.");
-                    RunPageView = where("Table Name"=const("Posted Seminar Registration"));
+                    RunPageView = where("Table Name"=const("Posted Seminar Reg. Header"));
                 }
                 action("&Charges")
                 {
