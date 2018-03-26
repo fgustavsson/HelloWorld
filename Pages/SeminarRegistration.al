@@ -3,9 +3,12 @@ page 123456710 "Seminar Registration"
     // CSD1.00 - 2018-01-01 - D. E. Veloper
     //   Chapter 6 - Lab 3-1
     //     - Created new page
+    //   Chapter 8 - Lab 2 - 4
+    //   Added Action Navigate
+
 
     Caption = 'Seminar Registration';
-    PageType = Card;
+    PageType = Document;
     SourceTable = "Seminar Registration Header";
     UsageCategory = tasks;
 
@@ -20,6 +23,8 @@ page 123456710 "Seminar Registration"
                     AssistEdit = true;
                     trigger OnAssistEdit();
                     begin
+                        if AssistEdit(xRec) then
+                            CurrPage.UPDATE;
                     end;
                 }
                 field("Starting Date"; "Starting Date")
@@ -31,7 +36,7 @@ page 123456710 "Seminar Registration"
                 field("Seminar Name"; "Seminar Name")
                 {
                 }
-                field("Instructor Code"; "Instructor Resource No.")
+                field("Instructor Resource No."; "Instructor Resource No.")
                 {
                 }
                 field("Instructor Name"; "Instructor Name")
@@ -55,15 +60,15 @@ page 123456710 "Seminar Registration"
                 field("Maximum Participants"; "Maximum Participants")
                 {
                 }
-                part(SeminarRegistrationLines; "Seminar Registration Subpage")
-                {
-                    Caption = 'Lines';
-                    SubPageLink = "Document No." = field ("No.");
-                }
+            }
+            part(SeminarRegistrationLines; "Seminar Registration Subpage")
+            {
+                Caption = 'Lines';
+                SubPageLink = "Document No." = field ("No.");
             }
             group("Seminar Room")
             {
-                field("Room Resource No."; "Room Resource No.")
+                field("Room Resource Code"; "Room Resource No.")
                 {
                 }
                 field("Room Name"; "Room Name")
@@ -107,6 +112,12 @@ page 123456710 "Seminar Registration"
             {
                 SubPageLink = "No." = field ("Seminar No.");
             }
+            part("Customer Details FactBox"; "Customer Details FactBox")
+            {
+                Provider = SeminarRegistrationLines;
+                SubPageLink = "No." = field ("Bill-to Customer No.");
+            }
+
             systempart("Links"; Links)
             {
             }
@@ -129,7 +140,7 @@ page 123456710 "Seminar Registration"
                     Image = Comment;
                     RunObject = Page 123456706;
                     RunPageLink = "No." = Field ("No.");
-                    RunPageView = where ("Table Name" = const ("Seminar Registration Header"));
+                    RunPageView = where ("Table Name" = const ("Seminar Registration"));
                 }
                 action("&Charges")
                 {
@@ -138,17 +149,35 @@ page 123456710 "Seminar Registration"
                     RunObject = Page 123456724;
                     RunPageLink = "Document No." = Field ("No.");
                 }
-                action("&Post")
-                {
-                    Caption = '&Post';
-                    Image = PostDocument;
-                    Promoted = true;
-                    PromotedIsBig = true;
-                    PromotedCategory = Process;
-                    PromotedOnly = true;
-                    ShortcutKey = F9;
-                    RunObject = codeunit "Seminar-Post (Yes/No)";
-                }
+            }
+        }
+        area(Processing)
+        {
+            action("&Navigate")
+            {
+                Caption = '&Navigate';
+                Image = Navigate;
+                Promoted = true;
+                PromotedCategory = Process;
+
+                trigger OnAction();
+                var
+                    Navigate: page Navigate;
+                begin
+                    Navigate.SetDoc("Posting Date", "No.");
+                    Navigate.RUN;
+                end;
+            }
+
+            action("&Post")
+            {
+                Caption = '&Post';
+                Image = PostDocument;
+                Promoted = true;
+                PromotedIsBig = true;
+                PromotedCategory = Process;
+                ShortcutKey = F9;
+                RunObject = codeunit "Seminar-Post (Yes/No)";
             }
         }
     }
